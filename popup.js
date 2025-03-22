@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 func: () => {
                     try {
                         const scriptElement = document.querySelector('script#__NEXT_DATA__');
-                        const headerText = document.querySelector('.OneDocumentHeader_MutedText__GtsoV time');
+                        const headerText = document.querySelector('.OneDocumentHeader_MutedText___AMqy');
                         const pathText = document.querySelector('.OneDocumentHeader-Path');
 
                         if (scriptElement && headerText && pathText) {
@@ -20,12 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             const baseURL = window.location.origin;
                             const jsonData = JSON.parse(scriptElement.textContent);
                             const imageID = jsonData.props.pageProps.currentNode.id;
-                            const fullImageURL = `${baseURL}/archive/api/image.jpg?id=${imageID}&type=original`;
+                            
+                            // Исправленный URL изображения (без .jpg)
+                            const fullImageURL = `${baseURL}/archive/api/image?id=${imageID}&type=original`;
 
-                            const dateRange = Array.from(document.querySelectorAll('.OneDocumentHeader_MutedText__GtsoV time'))
+                            // Новый селектор для дат
+                            const dateRange = Array.from(headerText.querySelectorAll('time'))
                                 .map(el => el.getAttribute('datetime'))
                                 .join('-');
 
+                            // Формирование названия файла
                             const fullTitle = `Метрическая книга ${dateRange} ${pathText.textContent.trim()}`;
 
                             console.log(`Скачивание изображения: ${fullImageURL} с названием: ${fullTitle}.jpg`);
