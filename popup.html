@@ -1,31 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Архив Изображения</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 10px;
+            padding: 16px;
+            width: 300px;
+            background-color: #f5f5f5;
         }
-        button {
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h3 {
+            margin: 0 0 16px 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-dot.valid {
+            background-color: #28a745;
+        }
+
+        .status-dot.invalid {
+            background-color: #dc3545;
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .settings {
+            margin-bottom: 16px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
             background-color: #007bff;
-            color: #fff;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .switch-label {
+            font-size: 14px;
+            color: #333;
+        }
+
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
             border: none;
             padding: 10px 15px;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
         }
+
         button:hover {
             background-color: #0056b3;
+        }
+
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
-    <h3>Откройте страницу с нужным изображением из Яндекс Архива</h3>
-    <button id="download-image">Скачать изображение</button>
+    <div class="container">
+        <h3>Архив Изображения</h3>
+        <div class="status-indicator">
+            <div class="status-dot" id="status-dot"></div>
+            <div class="status-text" id="status-text">Проверка страницы...</div>
+        </div>
+        <div class="settings">
+            <div class="switch-container">
+                <span class="switch-label">Скачивать текстовый файл</span>
+                <label class="switch">
+                    <input type="checkbox" id="download-text" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <button id="download-image" disabled>Скачать изображение</button>
+    </div>
     <script src="popup.js"></script>
 </body>
 </html>

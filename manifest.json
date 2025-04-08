@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Архив Изображения",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Скачивание изображений с Яндекс архива с заданным названием со страницы",
   "author": "Tywed",
   "homepage_url": "https://github.com/tywed/archive-image-downloader",
-  "permissions": ["scripting"],
+  "permissions": ["scripting", "storage"],
   "host_permissions": ["https://yandex.ru/*", "https://ya.ru/*"],
   "background": {
     "service_worker": "background.js"
